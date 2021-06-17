@@ -1,0 +1,56 @@
+Group member: Heng-Ying Chou, 
+
+- Question1:
+Why might an application prefer using malloc and free instead of using sbrk directly?
+
+#Answer:
+Malloc are free are user level programs that allows users to allocate or free memeory as they want. 
+sbrk is a system call that allocates memory not only for program but also for the process. 
+When a user calls malloc or free for allocating or deallocating memory, malloc or free call sbrk for allocating or deallocating memeory for the whole process. 
+Hereby, calling sbrk is more complicate then using malloc or free and the application would prefer using malloc or free than sbrk.   
+
+- Question2:
+Explain how the file descriptors of ls and wc change when the user types ls | wc in xk's shell.
+
+
+
+
+- Question3:
+When a syscall completes, user-level execution resumes with the instruction immediately after the syscall.  When a page fault exception completes, where does user-level execution resume?
+
+#Answer:
+When a page fault excpetion is handled, the user level exection resumes the instruction which causes page fault again. 
+This will casue the user level exection try to finish the instruction causing page fault and be trapped in this attemption.
+
+- Question4:
+How should the kernel decide whether an unmapped reference is a normal stack operation versus a stray pointer dereference that
+should cause the application to halt? What should happen, for example, if an application calls a procedure with a local variable that is an array
+of a million integers?
+
+#Answer:
+The kernel can know whether the refernece is an stray pointer or not by examing whether it is in the range of SZ_2G - 10 * PGSIZE to SZ_2G.
+If the reference is in this range, we can know that it is a valid reference. If not, we can know that it is stray pointer and want to halt the application.  
+
+
+- Question 5:
+Is it possible to reduce the user stack size at run-time (i.e., to deallocate the user stack when a procedure with a large number of local variables goes out of scope)?  If so, sketch how that
+might work.
+
+#Answer:
+Yes we can do it. We can check the difference between %rsp and the lowest address of stack. This difference includes the pages which will not be used in the process.
+We can deallocate the memory by freeing those pages.
+
+
+- Question 6:
+The TLB caches the page table entries of recently referenced pages. When you modify the page table entry to allow write access,
+how does xk ensure that the TLB does not have a stale version of the cache?
+
+
+
+
+- Question 7:
+For each member of the project team, how many hours did you spend on this lab?
+
+Heng-Ying Chou: 20 hours
+
+

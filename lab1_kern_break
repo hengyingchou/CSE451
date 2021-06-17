@@ -1,0 +1,6 @@
+break main
+break main
+break main
+break lab1test.c:74
+disable $bpnum
+break file.c:fileopen

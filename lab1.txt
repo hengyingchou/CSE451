@@ -1,0 +1,36 @@
+Part 1:
+  Question #1:	
+	@rocfang
+	(a)line 22: cpuid_print()
+  	(b)line 23: e820_print()
+  Question #2:
+	@rocfang
+	memory address of main is at addr=37008
+	No, GDB work with virtual addresses intead of real addresses
+Part 2:
+  Question #3:
+	@rocfang
+	xk maps both kernel and user-application into the same address space so that the kernel's system call code can directly refer to user memoy. Thus, imporve performance. 
+  Question #4:
+	@rocfang
+	user malloc: Finds enough memory in user address memory for the Header.
+	kernel kalloc: Finds the first available page in real physical memory and allocates it. Also, it asks for and releases lock for security.
+  	user prinf: Prints to a given file directory.
+	kernel cprintf: Prints to the console.
+  Question #5:
+	@rocfang
+	First excuted code is vector64 () at kernel/vectors.S:317, push $0
+  Question #6:
+	@rocfang
+	176 bytes
+  Question #7:
+	@rocfang
+	#0  sys_sleep () at kernel/sysproc.c:54
+	#1  0xffffffff80105008 in syscall () at kernel/syscall.c:170
+	#2  0xffffffff8010564d in trap (tf=0xffffffff80157f50) at kernel/trap.c:39
+	#3  0xffffffff801058f7 in alltraps () at kernel/trapasm.S:20
+
+ Question #8:
+
+ Rocky Fang: 20 hours
+ Chou, Hengying: 10 hours	 

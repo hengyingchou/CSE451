@@ -1,0 +1,40 @@
+Student Name: Chou, Heng-Ying
+              Fang, Rocky Zhenxiang
+
+
+Question #1
+Describe the relationship between scheduler, sched, swtch in kernel/proc.c.
+scheduler: 
+    Selected a process that is runnable and excute it.
+sched:
+    Enable the scheduler to run.
+swtch:
+    Performs context switching by saving callee save registers. In xk, this transaction only perform between process and scheduler.
+CPU calls scheduler and looping over without returing value. 
+scheduler can help cpu to choose process and use swtch to give control to the process.
+Once the process finish running, it can call sched to give the control back to the scheduler.
+Sched restores intena which is a property of this kernel thread and uses swtch to give control back to scheduler.
+Hereby, swtch can trasnfer the control between scheduler and process.   
+
+Question #2
+Describe why the child process is able to return to user-level application where fork is called.
+
+We know that after fork, the data stored in parent process is copied to the child process expect for the pid. These includes the memory region of the code and the register contents.
+We also know that %rip holds where to find the next instruction. Thus, the child process can return to the place right after fork is called.
+
+Question #3
+How does process kill work in xk? What is its relationship with exit?
+kill:
+    Called by another process with a pid. It will set the field "killed" to a non zero integer. 
+exit:
+    Called by the process itself. It not ony set the field of the process, but also release the resources. 
+A process can call exit to terminate itself. It also can call kill to terminate other process which can fire exit in other process,but a process can not call kill to terminate it self. Hereby, process can terminate itself by exit() and teminate other process by kill with indirect exit.    
+In the high level, if a process is target by kill, then it will exit whenever it is picked by the scheduler. When the process is scheduled, it will go though trap. 
+In the tarp, it checks if the process is killed, if so, it calls exit.
+
+ 
+Question #4
+For each member of the project team, how many hours did you spend on this lab?
+
+Chou, Heng-Ying: 20 hours
+Fang, Rocky Zhenxiang Fang: 10 hours
